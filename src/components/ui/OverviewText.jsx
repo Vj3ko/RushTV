@@ -12,7 +12,7 @@ const StyledOverview = styled.div`
     }
 
     @media ${device.laptopL} {
-      max-width: 37.5rem;
+      max-width: ${({ person }) => person ? "62.5rem" : "37.5rem"};
     }
 
     p{
@@ -49,12 +49,12 @@ const StyledOverview = styled.div`
 `
 
 
-export const OverviewText = ({ text }) => {
+export const OverviewText = ({ text, person }) => {
   const [active, setActive] = useState(false)
 
 
   return (
-    <StyledOverview className='overview'>
+    <StyledOverview person={person}>
       <AnimatePresence mode="wait">
         <motion.p key={active} className={active ? "" : "read-more"} variants={overviewVariant} initial="shrink" animate="grow" exit="shrink" > {text}</motion.p>
       </AnimatePresence>

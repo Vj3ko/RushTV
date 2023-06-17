@@ -31,7 +31,7 @@ const Person = () => {
                 {data?.imdb_id && <Button link={`https://imdb.com/name/${data.imdb_id}`} text="View on IMDB" />}
               </div>
 
-              {data?.biography && <OverviewText text={data.biography} />}
+              {data?.biography && <OverviewText text={data.biography} person={true} />}
 
               {data?.deathday !== null ?
                 <div>
