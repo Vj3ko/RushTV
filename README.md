@@ -7,23 +7,30 @@ Rush TV is an application that allows users to search for movies, TV shows, and 
 - **Search:** Easily search for movies, TV shows, or actors by entering the desired name in the search bar.
 - **Detailed Information:** Get comprehensive information about movies, TV shows, and actors, including plot summaries, release dates, genres, ratings, and more.
 - **Related Content:** Explore related content such as recommended movies, similar TV shows, and other works by the same actor.
-- **Favorites:** Mark movies, TV shows, or actors as favorites to create a personalized collection and quickly access them later.
 - **External Links:** Find direct links to official websites, IMDb profiles, and social media accounts of actors and productions.
-
-1. Create a new folder called "screenshots" in the root directory of your project.
-2. Save your screenshots in the "screenshots" folder with descriptive names (e.g., `search.png`, `movie-details.png`, etc.).
-3. Update the README.md file to include the screenshots.
 
 ## Screenshots
 
-### Search Page
-![Search Page](/src/assets/screenshots/search.png)
+<table>
+    <tr>
+        <td valign="top"><img src="/src/assets/screenshots/movie.png" width="100%" /></td>
+        <td valign="top"> <img src="/src/assets/screenshots/actor.png" width="100%" /></td>
+    </tr>
+</table>
 
-### Movie Details Page
-![Movie Details Page](/src/assets/screenshots/movie.png)
-
-### Actor Details Page
-![Actor Details Page](/src/assets/screenshots/actor.png)
+<table>
+    <tr>
+        <td><img src="/src/assets/screenshots/comedy.png" width="100%" /></td>
+    </tr>
+    <tr>
+        <td><img src="/src/assets/screenshots/actors.png" width="100%" /></td>
+    </tr>
+        <tr>
+        <td><img src="/src/assets/screenshots/toprated.png" width="100%" /></td>
+    </tr>
+        <tr>
+        <td><img src="/src/assets/screenshots/upcoming.png" width="100%" /></td>
+</table>
 
 ## Installation
 
