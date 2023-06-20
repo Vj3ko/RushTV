@@ -210,7 +210,6 @@ const StyledForm = styled.div`
 
 const StyledAccordion = styled.div`
     max-width: 50rem;
-    margin: 2.5rem auto;
   
       @media ${device.tablet} {
         display: none;
