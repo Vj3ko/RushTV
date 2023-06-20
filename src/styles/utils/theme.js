@@ -3,7 +3,8 @@ export const theme = {
     bgColor: "#0b0c0f",
     silver: "#B3B3B3",
     white: "#eff7f6",
-    blue: "#5468ff"
+    blue: "#5468ff",
+    oxfordBlue: "#002147"
   },
   fonts: {
     main: "Montserrat, sans-serif",
