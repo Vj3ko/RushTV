@@ -1,4 +1,4 @@
-# Rush TV
+# [Rush TV](https://rush-tv.vercel.app/)
 
 Rush TV is an application that allows users to search for movies, TV shows, and actors, providing them with detailed information sourced from The Movie Database (TMDB). With Rush TV, users can explore their favorite movies, discover new TV shows, and learn more about their favorite actors, all in one place.
 
