@@ -147,7 +147,7 @@ const Home = () => {
 
   const scrollToSection = (elementRef) => {
     window.scrollTo({
-      top: elementRef.current.offsetTop,
+      top: elementRef.current.offsetTop - 60,
       behavior: "smooth"
     })
   }

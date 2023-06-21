@@ -130,7 +130,6 @@ const Navigation = () => {
   const [navColor, setNavColor] = useState(false)
   const [lastScrollY, setLastScrollY] = useState(0);
 
-
   function controlNav() {
     if (typeof window !== 'undefined') {
       if (window.scrollY > 20) {
@@ -139,7 +138,7 @@ const Navigation = () => {
         setNavColor(false)
       }
 
-      if (window.scrollY > 1000 && window.scrollY > lastScrollY) { // if scroll down hide the navbar
+      if (window.scrollY > 1100 && window.scrollY > lastScrollY) { // if scroll down hide the navbar
         setIsNav(false);
       } else { // if scroll up show the navbar
         setIsNav(true);
