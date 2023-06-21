@@ -26,7 +26,7 @@ const Episode = () => {
   return (
     <AnimatedComponent>
       <PageSection>
-        <div className='wrapper'>
+        <div className='wrapper episode'>
           {data?.still_path && <CustomBg size="w1280" link={data.still_path} />}
 
           <Container>

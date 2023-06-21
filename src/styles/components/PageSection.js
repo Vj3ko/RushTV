@@ -18,6 +18,10 @@ export const PageSection = styled.section`
     ${mixins.flex("center", "flex-start")}
     flex-direction:column;
 
+    &.episode {
+      margin: ${({ theme }) => theme.sectionMarginS};
+    }
+
     @media ${device.tablet} {
       margin: ${({ theme }) => theme.sectionMarginS};
     }
