@@ -1,4 +1,5 @@
 import { AnimatePresence } from 'framer-motion';
+import { useEffect } from 'react';
 import { Route, Routes, useLocation } from 'react-router-dom';
 import { ThemeProvider, styled } from "styled-components";
 import { MemoizedFooter } from "./components/Footer";
@@ -17,8 +18,14 @@ const StyledMain = styled.main`
   min-height: 50vh;
 `
 
+
+
 function App() {
   const location = useLocation();
+
+  useEffect(() => {
+    window.history.scrollRestoration = 'manual'
+  }, [location.pathname])
 
   return (
     <>
