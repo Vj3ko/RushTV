@@ -63,6 +63,7 @@ const StyledSection = styled.section`
       border-radius: 1.563rem;
       border: none;
       font-size: 1rem;
+      transition: ${({ theme }) => theme.transition};
 
       @media ${device.laptop} {
         padding: 0.875rem 1.625rem;
@@ -78,6 +79,11 @@ const StyledSection = styled.section`
       background: transparent;
       outline: ${({ theme }) => theme.outline};
       caret-color: ${({ theme }) => theme.colors.white};
+
+      &:hover,
+      &:focus {
+        outline-color: ${({ theme }) => theme.colors.silver};
+      }
     }
 
     button {
@@ -89,6 +95,12 @@ const StyledSection = styled.section`
       background: ${({ theme }) => theme.colors.blue};
       outline: ${({ theme }) => theme.outline};
       cursor: pointer;
+
+      &:hover,
+      &:focus {
+        background: transparent;
+        outline-color: ${({ theme }) => theme.colors.silver};
+      }
 
       @media ${device.laptop} {
         width: unset;

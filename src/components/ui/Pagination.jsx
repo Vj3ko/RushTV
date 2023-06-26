@@ -15,6 +15,17 @@ const StyledPagination = styled.div`
       gap: 0.625rem;
     }
 
+    li {
+      visibility: visible;
+      opacity: 1;
+      transition: ${({ theme }) => theme.transition};
+
+      &.disabled {
+        visibility: hidden;
+        opacity: 0;
+      }
+    }
+
     .page-link {
       padding: 0.313rem 0.438rem;
       ${mixins.flex('center', 'center')};
