@@ -46,8 +46,8 @@ npm install
 3. Set up your TMDB API key.
     - Visit the [TMDB website](https://www.themoviedb.org/documentation/api) and create an account.
     - Generate an API key from your TMDB account dashboard.
-    - Open the `.env` file in the project root directory.
-    - Replace `REACT_APP_API_KEY` with your actual TMDB API key.
+    - Duplicate `.env.template` and rename it to `.env` file in the project root directory.
+    - Fill in `REACT_APP_API_KEY` with your actual TMDB API key.
 ```
 REACT_APP_API_KEY=YOUR_TMDB_API_KEY
 ```
