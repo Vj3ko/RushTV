@@ -1,6 +1,7 @@
 import { useContext } from 'react';
 import { BiTime } from 'react-icons/bi';
 import { useParams } from 'react-router-dom';
+import { useTheme } from 'styled-components';
 import AnimatedComponent from '../../animations/AnimatedComponent';
 import {
   Button,
@@ -23,6 +24,8 @@ const Movie = () => {
   const { data, loading } = useFetch({
     url: `${URL}/movie/${id}?api_key=${KEY}&include_adult=false&append_to_response=videos,similar,credits,recommendations,images,release_dates,content_ratings,external_ids&include_image_language=en,null`,
   });
+
+  const theme = useTheme();
 
   if (loading) return <Spinner />;
 
@@ -61,7 +64,10 @@ const Movie = () => {
 
                 {!!data?.runtime && (
                   <span className='runtime'>
-                    <BiTime color='#ffffff' size={20} />
+                    <BiTime
+                      color={theme.colors.white}
+                      size={theme.iconSizeMedium}
+                    />
                     <em style={{ whiteSpace: 'nowrap' }}>{data.runtime} min</em>
                   </span>
                 )}

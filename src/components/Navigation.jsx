@@ -4,7 +4,7 @@ import { AiOutlineClose } from 'react-icons/ai';
 import { BsSearch } from 'react-icons/bs';
 import { RiMenu3Line } from 'react-icons/ri';
 import { Link } from 'react-router-dom';
-import { styled } from 'styled-components';
+import { styled, useTheme } from 'styled-components';
 import {
   headerVariant,
   menuBtnVariant,
@@ -140,6 +140,8 @@ const Navigation = () => {
   const [navColor, setNavColor] = useState(false);
   const [lastScrollY, setLastScrollY] = useState(0);
 
+  const theme = useTheme();
+
   function controlNav() {
     if (typeof window !== 'undefined') {
       if (window.scrollY > 20) {
@@ -205,7 +207,10 @@ const Navigation = () => {
               <Link
                 to='/search'
                 onClick={() => (openMenu ? setOpenMenu(false) : null)}>
-                <BsSearch color='#ffffff' size={20} />
+                <BsSearch
+                  color={theme.colors.white}
+                  size={theme.iconSizeMedium}
+                />
               </Link>
               <button
                 className='header--cta'
@@ -218,7 +223,10 @@ const Navigation = () => {
                       initial='closed'
                       animate='open'
                       exit='exit'>
-                      <AiOutlineClose color='#ffffff' size={25} />
+                      <AiOutlineClose
+                        color={theme.colors.white}
+                        size={theme.iconSizeBig}
+                      />
                     </motion.div>
                   ) : (
                     <motion.div
@@ -227,7 +235,10 @@ const Navigation = () => {
                       initial='closed'
                       animate='open'
                       exit='exit'>
-                      <RiMenu3Line color='#ffffff' size={25} />
+                      <RiMenu3Line
+                        color={theme.colors.white}
+                        size={theme.iconSizeBig}
+                      />
                     </motion.div>
                   )}
                 </AnimatePresence>

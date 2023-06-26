@@ -19,4 +19,7 @@ export const theme = {
   sectionMarginS: '75px 0 0 0',
   sectionMarginM: '100px 0 0 0',
   transition: '250ms ease-in-out',
+  iconSizeMedium: 20,
+  iconSizeBig: 30,
+  headerHeight: 60,
 };

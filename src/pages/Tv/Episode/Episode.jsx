@@ -1,6 +1,7 @@
 import { useContext } from 'react';
 import { BiTime } from 'react-icons/bi';
 import { useParams } from 'react-router-dom';
+import { useTheme } from 'styled-components';
 import AnimatedComponent from '../../../animations/AnimatedComponent';
 import {
   Carousel,
@@ -30,6 +31,8 @@ const Episode = () => {
     url: `${URL}/tv/${id}?api_key=${KEY}`,
   });
 
+  const theme = useTheme();
+
   if (loading) return <Spinner />;
 
   return (
@@ -53,7 +56,10 @@ const Episode = () => {
 
               {!!data?.runtime && (
                 <span className='runtime'>
-                  <BiTime color='#ffffff' size={20} />
+                  <BiTime
+                    color={theme.colors.white}
+                    size={theme.iconSizeMedium}
+                  />
                   <em style={{ whiteSpace: 'nowrap' }}>{data.runtime} min</em>
                 </span>
               )}

@@ -1,7 +1,7 @@
 import { useContext, useRef } from 'react';
 import { BsChevronCompactDown } from 'react-icons/bs';
 import { Link } from 'react-router-dom';
-import { styled } from 'styled-components';
+import { styled, useTheme } from 'styled-components';
 import AnimatedComponent from '../../animations/AnimatedComponent';
 import heroImg from '../../assets/images/home_bg.jpg';
 import { ApiContext } from '../../context/ApiContext';
@@ -26,6 +26,7 @@ const StyledHero = styled.div`
     width: 100%;
     height: 100%;
     object-fit: cover;
+    //move the image position a little bit when viewing on small devices
     object-position: -21.875rem center;
 
     @media ${device.tablet} {
@@ -146,11 +147,12 @@ const Home = () => {
     url: `${URL}/discover/movie?api_key=${KEY}&include_adult=false&with_genres=80`,
   });
 
+  const theme = useTheme();
   const desc = useRef(null);
 
   const scrollToSection = elementRef => {
     window.scrollTo({
-      top: elementRef.current.offsetTop - 60,
+      top: elementRef.current.offsetTop - theme.headerHeight,
       behavior: 'smooth',
     });
   };
@@ -174,11 +176,17 @@ const Home = () => {
         <button
           onClick={() => scrollToSection(desc)}
           className='scrollToContent'>
-          <BsChevronCompactDown color='#B3B3B3' size={30} />
+          <BsChevronCompactDown
+            color={theme.colors.silver}
+            size={theme.iconSizeBig}
+          />
         </button>
 
         <div className='scrollToContent second'>
-          <BsChevronCompactDown color='#B3B3B3' size={30} />
+          <BsChevronCompactDown
+            color={theme.colors.silver}
+            size={theme.iconSizeBig}
+          />
         </div>
         <div className='overlay' />
       </StyledHero>
