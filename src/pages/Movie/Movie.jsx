@@ -91,14 +91,14 @@ const Movie = () => {
               {!!data?.revenue && (
                 <div>
                   <h3>Revenue</h3>
-                  <p>$ {formatCurrency(data.revenue)}</p>
+                  <p>{formatCurrency(data.revenue)}</p>
                 </div>
               )}
 
               {!!data?.budget && (
                 <div>
                   <h3>Budget</h3>
-                  <p>$ {formatCurrency(data.budget)}</p>
+                  <p>{formatCurrency(data.budget)}</p>
                 </div>
               )}
             </div>
