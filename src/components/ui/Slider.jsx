@@ -27,13 +27,14 @@ const StyledSlider = styled.section`
   .swiper-slide {
     width: ${({ size }) => (size === 'big' ? '20.625rem' : '10rem')};
     height: auto;
-    max-height: 305px;
+    max-height: 15rem;
     position: relative;
     border-radius: 1rem;
     overflow: hidden;
 
     @media ${device.tablet} {
       width: ${({ size }) => (size === 'big' ? '25rem' : '12.5rem')};
+      max-height: 18.75rem;
     }
 
     @media ${device.laptop} {
