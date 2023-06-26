@@ -55,26 +55,26 @@ const Person = () => {
               {data?.deathday !== null ? (
                 <div>
                   <h3>Date of birth</h3>
-                  <p>
+                  <span>
                     {formatDate(data?.birthday)} - {formatDate(data?.deathday)}{' '}
                     (died at {calculateLifeSpan(data?.birthday, data?.deathday)}
                     )
-                  </p>
+                  </span>
                 </div>
               ) : (
                 <div>
                   <h3>Date of birth</h3>
-                  <p>
+                  <span>
                     {formatDate(data?.birthday)} ({calculateAge(data?.birthday)}{' '}
                     years old)
-                  </p>
+                  </span>
                 </div>
               )}
 
               {!!data?.place_of_birth && (
                 <div>
                   <h3>Place of birth</h3>
-                  <p>{data.place_of_birth}</p>
+                  <span>{data.place_of_birth}</span>
                 </div>
               )}
             </div>
@@ -85,23 +85,25 @@ const Person = () => {
           {!!data?.gender && (
             <StatsSection>
               <h3>Gender</h3>
-              <p>{getGender(data.gender)}</p>
+              <span>{getGender(data.gender)}</span>
             </StatsSection>
           )}
 
           {data?.known_for_department && (
             <StatsSection>
               <h3>Known for</h3>
-              <p>{data.known_for_department}</p>
+              <span>{data.known_for_department}</span>
             </StatsSection>
           )}
 
           {data?.also_known_as && data?.also_known_as.length > 0 && (
             <StatsSection>
               <h3>Also known as</h3>
-              {data.also_known_as.map(item => (
-                <p key={item}>{item}</p>
-              ))}
+              <ul className='aka'>
+                {data.also_known_as.map(item => (
+                  <li key={item}>{item}</li>
+                ))}
+              </ul>
             </StatsSection>
           )}
 

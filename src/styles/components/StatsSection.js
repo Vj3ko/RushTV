@@ -7,4 +7,12 @@ export const StatsSection = styled.section`
   @media ${device.laptop} {
     margin: 2.5rem 0;
   }
+
+  .language {
+    text-transform: uppercase;
+  }
+
+  .aka {
+    color: ${({ theme }) => theme.colors.silver};
+  }
 `;

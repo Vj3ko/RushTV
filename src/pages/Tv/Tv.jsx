@@ -127,22 +127,21 @@ const Tv = () => {
           {data?.original_language && (
             <StatsSection>
               <h3>Language</h3>
-              <p style={{ textTransform: 'uppercase' }}>
-                {data.original_language}
-              </p>
+              <p className='language'>{data.original_language}</p>
             </StatsSection>
           )}
 
           {data?.genres && data?.genres.length > 0 && (
             <StatsSection>
               <h3>Genres</h3>
-              <div className='genre--wrapper'>
-                {data.genres.map(genre => (
-                  <span key={genre.id ?? genre.name} className='genres'>
-                    {genre.name}
-                  </span>
-                ))}
-              </div>
+              <span>
+                {data.genres.map((genre, index) => {
+                  if (index === data.genres.length - 1) {
+                    return genre.name;
+                  }
+                  return `${genre.name}, `;
+                })}
+              </span>
             </StatsSection>
           )}
 
@@ -150,13 +149,14 @@ const Tv = () => {
             data?.production_companies.length > 0 && (
               <StatsSection>
                 <h3>Production Companies</h3>
-                <div className='companies--wrapper'>
-                  {data.production_companies.map(company => (
-                    <span key={company.id ?? company.name} className='genres'>
-                      {company.name}
-                    </span>
-                  ))}
-                </div>
+                <span>
+                  {data.production_companies.map((company, index) => {
+                    if (index === data.production_companies.length - 1) {
+                      return company.name;
+                    }
+                    return `${company.name}, `;
+                  })}
+                </span>
               </StatsSection>
             )}
 

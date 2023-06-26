@@ -91,14 +91,14 @@ const Movie = () => {
               {!!data?.revenue && (
                 <div>
                   <h3>Revenue</h3>
-                  <p>{formatCurrency(data.revenue)}</p>
+                  <span>{formatCurrency(data.revenue)}</span>
                 </div>
               )}
 
               {!!data?.budget && (
                 <div>
                   <h3>Budget</h3>
-                  <p>{formatCurrency(data.budget)}</p>
+                  <span>{formatCurrency(data.budget)}</span>
                 </div>
               )}
             </div>
@@ -109,36 +109,35 @@ const Movie = () => {
           {data?.release_date && (
             <StatsSection>
               <h3>Release Date</h3>
-              <p>{formatDate(data.release_date)}</p>
+              <span>{formatDate(data.release_date)}</span>
             </StatsSection>
           )}
 
           {data?.status && (
             <StatsSection>
               <h3>Status</h3>
-              <p>{data.status}</p>
+              <span>{data.status}</span>
             </StatsSection>
           )}
 
           {data?.original_language && (
             <StatsSection>
               <h3>Language</h3>
-              <p style={{ textTransform: 'uppercase' }}>
-                {data.original_language}
-              </p>
+              <span className='language'>{data.original_language}</span>
             </StatsSection>
           )}
 
           {data?.genres && data?.genres.length > 0 && (
             <StatsSection>
               <h3>Genres</h3>
-              <div className='genre--wrapper'>
-                {data.genres.map(genre => (
-                  <span key={genre.name} className='genres'>
-                    {genre.name}
-                  </span>
-                ))}
-              </div>
+              <span>
+                {data.genres.map((genre, index) => {
+                  if (index === data.genres.length - 1) {
+                    return genre.name;
+                  }
+                  return `${genre.name}, `;
+                })}
+              </span>
             </StatsSection>
           )}
 
@@ -146,13 +145,14 @@ const Movie = () => {
             data?.production_companies.length > 0 && (
               <StatsSection>
                 <h3>Production Companies</h3>
-                <div className='companies--wrapper'>
-                  {data.production_companies.map(company => (
-                    <span key={company.name} className='genres'>
-                      {company.name}
-                    </span>
-                  ))}
-                </div>
+                <span>
+                  {data.production_companies.map((company, index) => {
+                    if (index === data.production_companies.length - 1) {
+                      return company.name;
+                    }
+                    return `${company.name}, `;
+                  })}
+                </span>
               </StatsSection>
             )}
 

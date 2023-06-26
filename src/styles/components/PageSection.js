@@ -71,21 +71,6 @@ export const PageSection = styled.section`
     }
   }
 
-  .genre--wrapper,
-  .companies--wrapper {
-    display: flex;
-    flex-wrap: wrap;
-    column-gap: 0.313rem;
-
-    span::after {
-      content: ',';
-    }
-
-    span:last-child::after {
-      content: '';
-    }
-  }
-
   .buttons--wrapper {
     display: flex;
     gap: 0.625rem;
