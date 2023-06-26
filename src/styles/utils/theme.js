@@ -22,4 +22,5 @@ export const theme = {
   iconSizeMedium: 20,
   iconSizeBig: 30,
   headerHeight: 60,
+  outline: '3px solid #5468ff',
 };

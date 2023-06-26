@@ -72,22 +72,23 @@ const StyledSection = styled.section`
 
     input {
       width: 100%;
+      max-width: 31.25rem;
+      text-align: center;
       color: ${({ theme }) => theme.colors.white};
       background: transparent;
-      outline: 3px solid ${({ theme }) => theme.colors.blue};
-      text-align: center;
-      max-width: 31.25rem;
+      outline: ${({ theme }) => theme.outline};
       caret-color: ${({ theme }) => theme.colors.white};
     }
 
     button {
-      font-family: ${({ theme }) => theme.fonts.action};
-      letter-spacing: 2px;
-      color: white;
-      background: ${({ theme }) => theme.colors.blue};
-      cursor: pointer;
-      max-width: 31.25rem;
       width: 100%;
+      max-width: 31.25rem;
+      font-family: ${({ theme }) => theme.fonts.action};
+      letter-spacing: 0.125rem;
+      color: ${({ theme }) => theme.colors.white};
+      background: ${({ theme }) => theme.colors.blue};
+      outline: ${({ theme }) => theme.outline};
+      cursor: pointer;
 
       @media ${device.laptop} {
         width: unset;
