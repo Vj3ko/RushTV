@@ -16,7 +16,7 @@ import {
 import { ApiContext } from '../../context/ApiContext';
 import { useFetch } from '../../hooks/useFetch';
 import { Container, PageSection, StatsSection } from '../../styles/components';
-import { formatCurrency, formatDate, formatYear } from '../../utils';
+import { formatCurrency, formatDate, formatYear, getTitle } from '../../utils';
 
 const Movie = () => {
   const { KEY, URL } = useContext(ApiContext);
@@ -80,7 +80,7 @@ const Movie = () => {
 
                 {data?.external_ids?.imdb_id && (
                   <Button
-                    link={`https://imdb.com/title/${data.external_ids.imdb_id}`}
+                    link={getTitle('title', data.external_ids.imdb_id)}
                     text='View on IMDB'
                   />
                 )}

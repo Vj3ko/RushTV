@@ -17,6 +17,7 @@ import {
   calculateLifeSpan,
   formatDate,
   getGender,
+  getTitle,
 } from '../../utils';
 
 const Person = () => {
@@ -41,7 +42,7 @@ const Person = () => {
               <div className='buttons--wrapper'>
                 {data?.imdb_id && (
                   <Button
-                    link={`https://imdb.com/name/${data.imdb_id}`}
+                    link={getTitle('name', data.imdb_id)}
                     text='View on IMDB'
                   />
                 )}
