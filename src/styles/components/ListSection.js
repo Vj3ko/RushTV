@@ -3,16 +3,16 @@ import { device } from '../utils';
 
 export const ListSection = styled.section`
   margin: ${({ theme }) => theme.sectionMarginS};
-  
+
   @media ${device.laptop} {
     margin: ${({ theme }) => theme.sectionMarginM};
   }
 
-  a{
+  a {
     color: ${({ theme }) => theme.colors.blue};
   }
 
-  .list{
+  .list {
     margin-top: 1.25rem;
 
     .results {
@@ -20,4 +20,4 @@ export const ListSection = styled.section`
       margin-top: 1.25rem;
     }
   }
-`
+`;

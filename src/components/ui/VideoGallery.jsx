@@ -3,7 +3,7 @@ import { styled } from 'styled-components';
 import { Navigation } from 'swiper';
 import 'swiper/css';
 import 'swiper/css/navigation';
-import { Swiper, SwiperSlide } from "swiper/react";
+import { Swiper, SwiperSlide } from 'swiper/react';
 import { device } from '../../styles/utils';
 
 const StyledGallery = styled.div`
@@ -39,23 +39,39 @@ const StyledGallery = styled.div`
       display: block;
     }
   }
-`
+`;
 
 export const VideoGallery = ({ gallery }) => {
   return (
     <StyledGallery>
-      <Swiper spaceBetween={10} loop={false} slidesPerView={"auto"} navigation={{ nextEl: '.swiper-button-next', prevEl: '.swiper-button-prev', clickable: true, }} modules={[Navigation]}>
-        {gallery?.map(item =>
+      <Swiper
+        spaceBetween={10}
+        loop={false}
+        slidesPerView={'auto'}
+        navigation={{
+          nextEl: '.swiper-button-next',
+          prevEl: '.swiper-button-prev',
+          clickable: true,
+        }}
+        modules={[Navigation]}>
+        {gallery?.map(item => (
           <SwiperSlide key={item.id}>
-            <ReactPlayer url={`https://www.youtube.com/watch?v=${item.key}`} playing={false} width={"100%"} height={"100%"} light={true} controls={true} />
+            <ReactPlayer
+              url={`https://www.youtube.com/watch?v=${item.key}`}
+              playing={false}
+              width={'100%'}
+              height={'100%'}
+              light={true}
+              controls={true}
+            />
           </SwiperSlide>
-        )}
+        ))}
 
-        <div className="slider-controler">
-          <div className="swiper-button-prev slider-arrow"></div>
-          <div className="swiper-button-next slider-arrow"></div>
+        <div className='slider-controler'>
+          <div className='swiper-button-prev slider-arrow'></div>
+          <div className='swiper-button-next slider-arrow'></div>
         </div>
       </Swiper>
     </StyledGallery>
-  )
-}
+  );
+};

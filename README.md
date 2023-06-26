@@ -35,23 +35,30 @@ Rush TV is an application that allows users to search for movies, TV shows, and 
 ## Installation
 
 1. Clone the repository to your local machine.
+
 ```
 git clone https://github.com/Vj3ko/RushTV
 ```
+
 2. Install the required dependencies.
+
 ```
 cd rushTV
 npm install
 ```
+
 3. Set up your TMDB API key.
-    - Visit the [TMDB website](https://www.themoviedb.org/documentation/api) and create an account.
-    - Generate an API key from your TMDB account dashboard.
-    - Duplicate `.env.template` and rename it to `.env` file in the project root directory.
-    - Fill in `REACT_APP_API_KEY` with your actual TMDB API key.
+   - Visit the [TMDB website](https://www.themoviedb.org/documentation/api) and create an account.
+   - Generate an API key from your TMDB account dashboard.
+   - Duplicate `.env.template` and rename it to `.env` file in the project root directory.
+   - Fill in `REACT_APP_API_KEY` with your actual TMDB API key.
+
 ```
 REACT_APP_API_KEY=YOUR_TMDB_API_KEY
 ```
+
 4. Start the application.
+
 ```
 npm start
 ```
@@ -66,7 +73,6 @@ npm start
 - Axios: Promise-based HTTP client for making API requests.
 - TMDB API: The Movie Database API for accessing movie, TV show, and actor data.
 
-
 ## License
 
 This project is licensed under the [MIT License](LICENSE).
@@ -74,6 +80,5 @@ This project is licensed under the [MIT License](LICENSE).
 ## Acknowledgments
 
 Rush TV makes use of the TMDB API for accessing movie, TV show, and actor data. Special thanks to the TMDB team for providing this valuable resource.
-
 
 Enjoy using Rush TV and happy movie watching!

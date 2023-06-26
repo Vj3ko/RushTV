@@ -1,5 +1,5 @@
-import styled from 'styled-components'
-import { device } from '../utils'
+import styled from 'styled-components';
+import { device } from '../utils';
 
 export const Container = styled.div`
   width: 100%;
@@ -9,5 +9,4 @@ export const Container = styled.div`
   @media ${device.laptop} {
     padding: ${({ theme }) => theme.containerPaddingM};
   }
-
-`
+`;

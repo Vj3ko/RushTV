@@ -1,4 +1,4 @@
-import { css } from 'styled-components'
+import { css } from 'styled-components';
 
 export const mixins = {
   flex: (justify, align) => css`
@@ -6,4 +6,4 @@ export const mixins = {
     justify-content: ${justify};
     align-items: ${align};
   `,
-}
+};

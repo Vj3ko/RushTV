@@ -1,50 +1,77 @@
 import { useContext } from 'react';
 import { useParams } from 'react-router-dom';
-import AnimatedComponent from "../../animations/AnimatedComponent";
-import { Button, Carousel, CustomBg, CustomImg, OverviewText, Slider, Spinner, VideoGallery } from '../../components/ui';
+import AnimatedComponent from '../../animations/AnimatedComponent';
+import {
+  Button,
+  Carousel,
+  CustomBg,
+  CustomImg,
+  OverviewText,
+  Slider,
+  Spinner,
+  VideoGallery,
+} from '../../components/ui';
 import { ApiContext } from '../../context/ApiContext';
 import { useFetch } from '../../hooks/useFetch';
 import { Container, PageSection, StatsSection } from '../../styles/components';
-import { formatDate, formatYear } from "../../utils";
-
-
+import { formatDate, formatYear } from '../../utils';
 
 const Tv = () => {
-  const { KEY, URL } = useContext(ApiContext)
-  const { id } = useParams()
+  const { KEY, URL } = useContext(ApiContext);
+  const { id } = useParams();
   const { data, loading } = useFetch({
-    url: `${URL}/tv/${id}?api_key=${KEY}&include_adult=false&append_to_response=videos,similar,credits,recommendations,images,release_dates,content_ratings,external_ids&include_image_language=en,null`
-  })
+    url: `${URL}/tv/${id}?api_key=${KEY}&include_adult=false&append_to_response=videos,similar,credits,recommendations,images,release_dates,content_ratings,external_ids&include_image_language=en,null`,
+  });
 
-  if (loading) return <Spinner />
+  if (loading) return <Spinner />;
 
   return (
     <AnimatedComponent>
       <PageSection>
-        {data?.backdrop_path && <CustomBg size="w1280" link={data.backdrop_path} />}
+        {data?.backdrop_path && (
+          <CustomBg size='w1280' link={data.backdrop_path} />
+        )}
         <div className='wrapper'>
-          <CustomImg size="w500" link={data?.poster_path} />
+          <CustomImg size='w500' link={data?.poster_path} />
 
           <Container>
-            <div className="media">
-              {!!data?.vote_average && <p>Rating: {data.vote_average.toFixed(1)}</p>}
-              <h1>{data?.title ?? data?.name}
-                {data?.first_air_date && <span className='year'>({formatYear(data.first_air_date)})</span>}
+            <div className='media'>
+              {!!data?.vote_average && (
+                <p>Rating: {data.vote_average.toFixed(1)}</p>
+              )}
+              <h1>
+                {data?.title ?? data?.name}
+                {data?.first_air_date && (
+                  <span className='year'>
+                    ({formatYear(data.first_air_date)})
+                  </span>
+                )}
               </h1>
 
               {data?.tagline && <p>"{data.tagline}"</p>}
 
-              {data?.genres.length > 0 && <div className="genres">
-                <div>
-                  <span className='genre'>{data?.genres[0].name}</span>
-                  {data?.genres[1] && <span className='genre'>/ {data?.genres[1].name}</span>}
+              {data?.genres.length > 0 && (
+                <div className='genres'>
+                  <div>
+                    <span className='genre'>{data?.genres[0].name}</span>
+                    {data?.genres[1] && (
+                      <span className='genre'>/ {data?.genres[1].name}</span>
+                    )}
+                  </div>
                 </div>
-              </div>}
+              )}
 
               <div className='buttons--wrapper'>
-                {data?.homepage && <Button link={data.homepage} text="Visit Website" />}
+                {data?.homepage && (
+                  <Button link={data.homepage} text='Visit Website' />
+                )}
 
-                {data?.external_ids?.imdb_id && <Button link={`https://imdb.com/title/${data.external_ids.imdb_id}`} text="View on IMDB" />}
+                {data?.external_ids?.imdb_id && (
+                  <Button
+                    link={`https://imdb.com/title/${data.external_ids.imdb_id}`}
+                    text='View on IMDB'
+                  />
+                )}
               </div>
 
               {data?.overview && <OverviewText text={data.overview} />}
@@ -66,9 +93,9 @@ const Tv = () => {
           </Container>
         </div>
 
-        <Container >
+        <Container>
           {data?.first_air_date && (
-            <StatsSection >
+            <StatsSection>
               <h3>First Air Date</h3>
               <p>{formatDate(data.first_air_date)}</p>
             </StatsSection>
@@ -100,80 +127,85 @@ const Tv = () => {
           {data?.original_language && (
             <StatsSection>
               <h3>Language</h3>
-              <p style={{ textTransform: "uppercase" }}>{data.original_language}</p>
+              <p style={{ textTransform: 'uppercase' }}>
+                {data.original_language}
+              </p>
             </StatsSection>
           )}
 
-          {(data?.genres && data?.genres.length > 0) && (
+          {data?.genres && data?.genres.length > 0 && (
             <StatsSection>
               <h3>Genres</h3>
               <div className='genre--wrapper'>
-                {data.genres.map(genre =>
-                  <span key={genre.id ?? genre.name} className='genres'>{genre.name}</span>
-                )}
+                {data.genres.map(genre => (
+                  <span key={genre.id ?? genre.name} className='genres'>
+                    {genre.name}
+                  </span>
+                ))}
               </div>
             </StatsSection>
           )}
 
-          {(data?.production_companies && data?.production_companies.length > 0) && (
-            <StatsSection>
-              <h3>Production Companies</h3>
-              <div className="companies--wrapper">
-                {data.production_companies.map(company =>
-                  <span key={company.id ?? company.name} className='genres'>{company.name}</span>
-                )}
-              </div>
-            </StatsSection>
-          )}
+          {data?.production_companies &&
+            data?.production_companies.length > 0 && (
+              <StatsSection>
+                <h3>Production Companies</h3>
+                <div className='companies--wrapper'>
+                  {data.production_companies.map(company => (
+                    <span key={company.id ?? company.name} className='genres'>
+                      {company.name}
+                    </span>
+                  ))}
+                </div>
+              </StatsSection>
+            )}
 
-          {(data?.seasons && data?.seasons.length > 0) && (
+          {data?.seasons && data?.seasons.length > 0 && (
             <StatsSection>
               <h2>Seasons</h2>
-              <Slider gallery={data.seasons} mediaType="season" id={id} />
+              <Slider gallery={data.seasons} mediaType='season' id={id} />
             </StatsSection>
           )}
 
-          {(data?.credits?.cast && data?.credits?.cast.length > 0) && (
+          {data?.credits?.cast && data?.credits?.cast.length > 0 && (
             <StatsSection>
               <h2>Cast</h2>
-              <Slider gallery={data.credits.cast} mediaType="person" />
+              <Slider gallery={data.credits.cast} mediaType='person' />
             </StatsSection>
           )}
 
-
-          {(data?.videos?.results && data?.videos?.results.length > 0) && (
+          {data?.videos?.results && data?.videos?.results.length > 0 && (
             <StatsSection>
               <h2>Trailers and videos</h2>
               <VideoGallery gallery={data.videos.results} />
             </StatsSection>
           )}
 
-          {(data?.images?.backdrops && data?.images.backdrops.length > 0) && (
+          {data?.images?.backdrops && data?.images.backdrops.length > 0 && (
             <StatsSection>
               <h2>Images</h2>
-              <Carousel data={data.images.backdrops} size="big" />
+              <Carousel data={data.images.backdrops} size='big' />
             </StatsSection>
           )}
 
-          {(data?.recommendations?.results && data?.recommendations.results.length > 0) && (
-            <StatsSection>
-              <h2>Recommended Tv Shows</h2>
-              <Slider gallery={data.recommendations.results} mediaType="tv" />
-            </StatsSection>
-          )}
+          {data?.recommendations?.results &&
+            data?.recommendations.results.length > 0 && (
+              <StatsSection>
+                <h2>Recommended Tv Shows</h2>
+                <Slider gallery={data.recommendations.results} mediaType='tv' />
+              </StatsSection>
+            )}
 
-          {(data?.similar?.results && data?.similar?.results.length > 0) && (
+          {data?.similar?.results && data?.similar?.results.length > 0 && (
             <StatsSection>
               <h2>Similar Tv Shows</h2>
-              <Slider gallery={data.similar.results} mediaType="tv" />
+              <Slider gallery={data.similar.results} mediaType='tv' />
             </StatsSection>
           )}
         </Container>
-
-
       </PageSection>
     </AnimatedComponent>
-  )
-}
+  );
+};
 
 export default Tv;

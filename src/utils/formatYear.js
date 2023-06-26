@@ -1,7 +1,7 @@
 const options = {
-  year: "numeric",
-}
+  year: 'numeric',
+};
 
-export const formatYear = (date) => {
-  return new Date(date).toLocaleString("en-US", options)
-}
+export const formatYear = date => {
+  return new Date(date).toLocaleString('en-US', options);
+};

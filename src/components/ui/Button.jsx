@@ -1,5 +1,5 @@
-import { styled } from 'styled-components'
-import { device } from '../../styles/utils'
+import { styled } from 'styled-components';
+import { device } from '../../styles/utils';
 
 const StyledLink = styled.a`
   text-transform: uppercase;
@@ -17,12 +17,19 @@ const StyledLink = styled.a`
     padding: 0.375rem 1.375rem;
   }
 
-  &:hover,&:focus{
+  &:hover,
+  &:focus {
     background: ${({ theme }) => theme.colors.blue};
     color: ${({ theme }) => theme.colors.white};
   }
-`
+`;
 
 export const Button = ({ link, text, target }) => {
-  return link && <StyledLink href={link} target="_blank">{text}</StyledLink>
-}
+  return (
+    link && (
+      <StyledLink href={link} target='_blank'>
+        {text}
+      </StyledLink>
+    )
+  );
+};

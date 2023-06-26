@@ -1,5 +1,5 @@
-import { useEffect } from "react";
-import { useLocation } from "react-router-dom";
+import { useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 
 export const ScrollToTop = () => {
   const location = useLocation();
@@ -7,8 +7,8 @@ export const ScrollToTop = () => {
   useEffect(() => {
     setTimeout(() => {
       window.scrollTo(0, 0);
-    }, 300)
+    }, 300);
   }, [location.pathname]);
 
   return null;
-}
+};

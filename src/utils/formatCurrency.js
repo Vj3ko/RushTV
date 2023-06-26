@@ -1,3 +1,3 @@
-export const formatCurrency = (currency) => {
-  return currency.toLocaleString("en-US")
-}
+export const formatCurrency = currency => {
+  return currency.toLocaleString('en-US');
+};

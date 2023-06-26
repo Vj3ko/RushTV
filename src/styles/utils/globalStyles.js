@@ -84,4 +84,4 @@ export const GlobalStyles = createGlobalStyle`
     border: none;
     cursor: pointer;
   }
-`
+`;

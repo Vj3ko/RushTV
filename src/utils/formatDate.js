@@ -1,9 +1,9 @@
 const options = {
-  year: "numeric",
-  month: "long",
-  day: "numeric"
-}
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric',
+};
 
-export const formatDate = (date) => {
-  return new Date(date).toLocaleString("en-US", options)
-}
+export const formatDate = date => {
+  return new Date(date).toLocaleString('en-US', options);
+};
