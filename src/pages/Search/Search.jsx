@@ -1,6 +1,6 @@
 import axios from 'axios';
 import React, { useCallback, useContext, useEffect, useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useSearchParams } from 'react-router-dom';
 import styled from 'styled-components';
 import AnimatedComponent from '../../animations/AnimatedComponent';
 import { Pagination, Slider, Spinner } from '../../components/ui';
@@ -115,9 +115,38 @@ const Search = () => {
   const [inputText, setInputText] = useState('');
   const [data, setData] = useState(null);
   const [showData, setShowData] = useState(false);
-  const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
   const { KEY, URL } = useContext(ApiContext);
+  const [searchParams, setSearchParams] = useSearchParams();
+
+  const fetchData = url => {
+    if (!showData) setLoading(true);
+    if (url) {
+      let isCancelled = false;
+      axios
+        .get(url)
+        .then(res => {
+          if (!isCancelled) setData(res.data);
+        })
+        .finally(() => {
+          setLoading(false);
+          setShowData(true);
+        });
+
+      return () => (isCancelled = true);
+    }
+  };
+
+  const query = searchParams.get('q');
+
+  useEffect(() => {
+    if (query) {
+      fetchData(
+        `${URL}/search/multi?api_key=${KEY}&language=en-US&query=${query}&page=${pageValue}&include_adult=false`
+      );
+      setInputText(query);
+    }
+  }, [query, pageValue]);
 
   const callbackPageChange = useCallback(page => {
     setPageValue(page);
@@ -133,39 +162,9 @@ const Search = () => {
   const handleSubmit = e => {
     e.preventDefault();
     if (inputText && inputText.replace(/\s/g, '').length > 0) {
-      fetchData(
-        `${URL}/search/multi?api_key=${KEY}&language=en-US&query=${inputText}&page=${pageValue}&include_adult=false`
-      );
-      navigate({ pathname: '/search', search: `?q=${inputText}` });
+      setSearchParams(`q=${inputText}`);
     }
   };
-
-  const fetchData = url => {
-    if (!showData) setLoading(true);
-    if (url) {
-      let isCancelled = false;
-      axios
-        .get(url)
-        .then(res => {
-          if (!isCancelled) setData(res.data);
-        })
-        .finally(() => {
-          setTimeout(() => setLoading(false), 200);
-          // setLoading(false)
-          setShowData(true);
-        });
-
-      return () => (isCancelled = true);
-    }
-  };
-
-  useEffect(() => {
-    if (showData) {
-      fetchData(
-        `${URL}/search/multi?api_key=${KEY}&language=en-US&query=${inputText}&page=${pageValue}&include_adult=false`
-      );
-    }
-  }, [pageValue]);
 
   if (loading) return <Spinner />;
 
