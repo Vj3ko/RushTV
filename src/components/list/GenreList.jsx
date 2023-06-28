@@ -5,7 +5,7 @@ import AnimatedComponent from '../../animations/AnimatedComponent';
 import { ApiContext } from '../../context/ApiContext';
 import { useFetch } from '../../hooks/useFetch';
 import { Container, FilterBtns, ListSection } from '../../styles/components';
-import { Pagination, Slider } from '../ui';
+import { Pagination, Results, Slider } from '../ui';
 
 const StyledButton = styled.button`
   white-space: nowrap;
@@ -78,7 +78,7 @@ const GenreList = ({ mediaType, title, genre }) => {
             <Slider gallery={data?.results} mediaType={mediaType} />
 
             <div className='results'>
-              <p>A total of {data?.total_results} results has been found!</p>
+              <Results results={data?.total_results} />
             </div>
 
             <div className='pagination--wrapper'>

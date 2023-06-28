@@ -3,7 +3,7 @@ import React, { useCallback, useContext, useEffect, useState } from 'react';
 import { Link, useSearchParams } from 'react-router-dom';
 import styled from 'styled-components';
 import AnimatedComponent from '../../animations/AnimatedComponent';
-import { Pagination, Slider, Spinner } from '../../components/ui';
+import { Pagination, Results, Slider, Spinner } from '../../components/ui';
 import { ApiContext } from '../../context/ApiContext';
 import { Container } from '../../styles/components';
 import { device, mixins } from '../../styles/utils';
@@ -213,9 +213,7 @@ const Search = () => {
                     />
 
                     <div className='results'>
-                      <p>
-                        A total of {data?.total_results} results has been found!
-                      </p>
+                      <Results results={data?.total_results} />
                     </div>
 
                     <div className='pagination--wrapper'>

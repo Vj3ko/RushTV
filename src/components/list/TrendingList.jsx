@@ -4,7 +4,7 @@ import AnimatedComponent from '../../animations/AnimatedComponent';
 import { ApiContext } from '../../context/ApiContext';
 import { useFetch } from '../../hooks/useFetch';
 import { Container, ListSection } from '../../styles/components';
-import { Pagination, Slider } from '../ui';
+import { Pagination, Results, Slider } from '../ui';
 
 const TrendingList = ({ mediaType, timeline, title }) => {
   const [pageValue, setPageValue] = useState(1);
@@ -32,7 +32,7 @@ const TrendingList = ({ mediaType, timeline, title }) => {
             <Slider gallery={data?.results} />
 
             <div className='results'>
-              <p>A total of {data?.total_results} results has been found!</p>
+              <Results results={data?.total_results} />
             </div>
 
             <div className='pagination--wrapper'>
