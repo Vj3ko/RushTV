@@ -12,7 +12,16 @@ import {
   TrendingList,
 } from './components/list';
 import { ApiContext } from './context/ApiContext';
-import { Episode, Home, Movie, Person, Search, Season, Tv } from './pages';
+import {
+  Episode,
+  Home,
+  Movie,
+  PageNotFound,
+  Person,
+  Search,
+  Season,
+  Tv,
+} from './pages';
 import { GlobalStyles, theme } from './styles/utils';
 import { ScrollToTop } from './utils';
 
@@ -426,6 +435,8 @@ function App() {
                   path='/tv/:id/season/:season_number/episode/:episode_number'
                   element={<Episode />}
                 />
+
+                <Route path='*' element={<PageNotFound />} />
               </Routes>
             </AnimatePresence>
           </ApiContext.Provider>
