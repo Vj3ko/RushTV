@@ -1,17 +1,18 @@
-import axios from 'axios';
-import React, { useCallback, useContext, useEffect, useState } from 'react';
-import { Link, useSearchParams } from 'react-router-dom';
-import styled from 'styled-components';
-import AnimatedComponent from '../../animations/AnimatedComponent';
-import { Pagination, Results, Slider, Spinner } from '../../components/ui';
-import { ApiContext } from '../../context/ApiContext';
-import { Container } from '../../styles/components';
-import { device, mixins } from '../../styles/utils';
+import axios from "axios";
+import React, { useCallback, useContext, useEffect, useState } from "react";
+import { Link, useSearchParams } from "react-router-dom";
+import styled from "styled-components";
+import AnimatedComponent from "../../animations/AnimatedComponent";
+import { Pagination, Results, Slider, Spinner } from "../../components/ui";
+import { ApiContext } from "../../context/ApiContext";
+import { Container } from "../../styles/components";
+import { device, mixins } from "../../styles/utils";
+import { useDebounce } from "../../hooks/useDebounce";
 
 const StyledSection = styled.section`
   text-align: center;
   min-height: 60vh;
-  ${mixins.flex('unset', 'center')};
+  ${mixins.flex("unset", "center")};
   margin: ${({ theme }) => theme.sectionMarginS};
 
   @media ${device.laptop} {
@@ -48,7 +49,7 @@ const StyledSection = styled.section`
   }
 
   form {
-    ${mixins.flex('center', 'center')};
+    ${mixins.flex("center", "center")};
     gap: 0.938rem;
     flex-direction: column;
     margin-top: 1.25rem;
@@ -112,24 +113,25 @@ const StyledSection = styled.section`
 
 const Search = () => {
   const [pageValue, setPageValue] = useState(1);
-  const [inputText, setInputText] = useState('');
+  const [inputText, setInputText] = useState("");
   const [data, setData] = useState(null);
   const [showData, setShowData] = useState(false);
   const [loading, setLoading] = useState(false);
   const { KEY, URL } = useContext(ApiContext);
-  const [searchParams, setSearchParams] = useSearchParams();
 
-  const fetchData = url => {
+  const debouncedSearch = useDebounce(inputText);
+
+  const fetchData = (url) => {
     if (!showData) setLoading(true);
     if (url) {
       let isCancelled = false;
       axios
         .get(url)
-        .then(res => {
+        .then((res) => {
           if (!isCancelled) setData(res.data);
         })
         .finally(() => {
-          setLoading(false);
+          setTimeout(() => setLoading(false), 200);
           setShowData(true);
         });
 
@@ -137,106 +139,71 @@ const Search = () => {
     }
   };
 
-  const query = searchParams.get('q');
+  useEffect(() => {
+    setPageValue(1);
+  }, [debouncedSearch]);
 
   useEffect(() => {
-    if (query) {
+    if (debouncedSearch) {
       fetchData(
-        `${URL}/search/multi?api_key=${KEY}&language=en-US&query=${query}&page=${pageValue}&include_adult=false`
+        `${URL}/search/multi?api_key=${KEY}&language=en-US&query=${debouncedSearch}&page=${pageValue}&include_adult=false`
       );
-      setInputText(query);
+    } else {
+      resetSearch();
     }
-  }, [query, pageValue]);
+  }, [debouncedSearch, pageValue]);
 
-  const callbackPageChange = useCallback(page => {
+  const callbackPageChange = useCallback((page) => {
     setPageValue(page);
   }, []);
 
   function resetSearch() {
-    setInputText('');
     setShowData(false);
     setPageValue(1);
     setData(null);
   }
 
-  const handleSubmit = e => {
-    e.preventDefault();
-    if (inputText && inputText.replace(/\s/g, '').length > 0) {
-      setSearchParams(`q=${inputText}`);
-    }
-  };
-
-  if (loading) return <Spinner />;
-
   return (
     <AnimatedComponent>
       <Container>
-        <StyledSection
-          style={{
-            alignItems:
-              showData && data?.results.length !== 0 ? 'start' : 'center',
-          }}>
-          <div className='wrapper'>
-            {!showData ? (
-              <div>
-                <h2>What are u looking for</h2>
-                <p>Start searching by typing a word or a phrase.</p>
-                <form onSubmit={handleSubmit}>
-                  <input
-                    type='text'
-                    autoFocus
-                    value={inputText}
-                    onChange={e => setInputText(e.target.value)}
-                    placeholder='Enter search term'
-                  />
-                  <button>Search</button>
-                </form>
-              </div>
-            ) : showData && data?.results.length !== 0 ? (
-              <div style={{ width: '100%' }}>
+        <StyledSection>
+          <div className="wrapper">
+            <div>
+              <h2>What are u looking for</h2>
+              <p>Start searching by typing a word or a phrase.</p>
+              <form>
+                <input
+                  type="text"
+                  autoFocus
+                  value={inputText}
+                  onChange={(e) => setInputText(e.target.value)}
+                  placeholder="Enter search term"
+                />
+              </form>
+            </div>
+            {loading && <Spinner />}
+            {!loading && showData && data?.results.length !== 0 && (
+              <div style={{ width: "100%" }}>
                 <div>
-                  <h2 style={{ textAlign: 'left' }}>
-                    Results for related term: "<em>{inputText}"</em>
-                  </h2>
-                  <p style={{ textAlign: 'left' }}>
-                    Not exactly what you were searching for? Click{' '}
-                    <Link onClick={resetSearch} to='/search'>
-                      here
-                    </Link>{' '}
-                    to try again.
-                  </p>
-
-                  <div className='list'>
+                  <div className="list">
                     <Slider
                       gallery={data?.results}
                       mediaType={data?.mediaType}
                     />
 
-                    <div className='results'>
+                    <div className="results">
                       <Results results={data?.total_results} />
                     </div>
 
-                    <div className='pagination--wrapper'>
+                    <div className="pagination--wrapper">
                       <Pagination
                         changePage={callbackPageChange}
                         totalPages={data?.total_pages}
+                        forcedPage={pageValue - 1}
                       />
                     </div>
                   </div>
                 </div>
-              </div>
-            ) : (
-              <div>
-                <h2>
-                  No results found for term: "<em>{inputText}"</em>
-                </h2>
-                <p>
-                  Not exactly what you were searching for? Click{' '}
-                  <Link onClick={resetSearch} to='/search'>
-                    here
-                  </Link>{' '}
-                  to try again.
-                </p>
               </div>
             )}
           </div>

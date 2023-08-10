@@ -1,11 +1,11 @@
-import React from 'react';
-import ReactPaginate from 'react-paginate';
-import styled from 'styled-components';
-import { device, mixins } from '../../styles/utils';
+import React from "react";
+import ReactPaginate from "react-paginate";
+import styled from "styled-components";
+import { device, mixins } from "../../styles/utils";
 
 const StyledPagination = styled.div`
   padding: 1.25rem;
-  ${mixins.flex('center', 'center')};
+  ${mixins.flex("center", "center")};
 
   .pagination {
     display: flex;
@@ -33,7 +33,7 @@ const StyledPagination = styled.div`
     }
 
     .page-link {
-      ${mixins.flex('center', 'center')};
+      ${mixins.flex("center", "center")};
 
       &.active {
         a {
@@ -45,24 +45,29 @@ const StyledPagination = styled.div`
   }
 `;
 
-const PaginationCom = ({ changePage, totalPages }) => {
+const PaginationCom = ({ changePage, totalPages, forcedPage }) => {
+  const changeThePage = (e) => {
+    changePage(e.selected + 1);
+  };
+
   return (
     <StyledPagination>
       <ReactPaginate
-        previousLabel='<'
-        nextLabel='>'
-        breakLabel='...'
-        onPageChange={e => changePage(e.selected + 1)}
+        previousLabel="<"
+        nextLabel=">"
+        breakLabel="..."
+        onPageChange={(e) => changeThePage(e)}
         marginPagesDisplayed={1}
         pageRangeDisplayed={3}
         pageCount={totalPages > 500 ? 500 : totalPages || 200}
         renderOnZeroPageCount={null}
-        containerClassName='pagination'
-        pageClassName='page-link '
-        breakClassName='page-link '
-        previousLinkClassName='page-link '
-        nextLinkClassName='page-link '
-        activeClassName='active'
+        containerClassName="pagination"
+        pageClassName="page-link "
+        breakClassName="page-link "
+        previousLinkClassName="page-link "
+        nextLinkClassName="page-link "
+        activeClassName="active"
+        forcePage={forcedPage}
       />
     </StyledPagination>
   );
